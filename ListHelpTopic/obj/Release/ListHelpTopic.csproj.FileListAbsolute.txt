@@ -1,0 +1,6 @@
+C:\Users\jruffell\source\repos\ListHelpTopic\ListHelpTopic\bin\Release\ListHelpTopic.exe.config
+C:\Users\jruffell\source\repos\ListHelpTopic\ListHelpTopic\bin\Release\ListHelpTopic.exe
+C:\Users\jruffell\source\repos\ListHelpTopic\ListHelpTopic\bin\Release\ListHelpTopic.pdb
+C:\Users\jruffell\source\repos\ListHelpTopic\ListHelpTopic\obj\Release\ListHelpTopic.csproj.CoreCompileInputs.cache
+C:\Users\jruffell\source\repos\ListHelpTopic\ListHelpTopic\obj\Release\ListHelpTopic.exe
+C:\Users\jruffell\source\repos\ListHelpTopic\ListHelpTopic\obj\Release\ListHelpTopic.pdb

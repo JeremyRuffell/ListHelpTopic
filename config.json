@@ -1,0 +1,12 @@
+{
+  "ToIgnore": [
+    {
+      "ClassName": "WaveImportForm",
+      "HelpTopicReturnValue": "Setup_Wave"
+    },
+    {
+      "ClassName": "PaymentNavigation",
+      "HelpTopicReturnValue": "Accounting_Payments"
+    }
+  ]
+}
