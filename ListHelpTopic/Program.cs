@@ -1,6 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Win32;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -14,13 +16,43 @@ namespace ListHelpTopic
         // List that holds Class's HelpTopic Values for the class's that have a bug.
         public static List<Item> myList = new List<Item>();
 
+        // Public string so that Config file data can be accessed anywhere within the program.
+        public static Config.DataModel config;
+
         static void Main(string[] args)
         {
+            // Load Config file.
+            try
+            {
+                // Try load the config file.
+                config = Config.Load();
+            }
+            catch (Exception)
+            {
+                // Create a default config file.
+                Config.Create();
+                // Load the config file.
+                config = Config.Load();
+            }
 
-            LoadConfig();
+            // Add all Ignored Class's to a list.
+            foreach (Config.DataModel.Toignore x in config.ToIgnore)
+            {
+                myList.Add(new Item { ClassName = x.ClassName, HelpTopicReturnValue = x.HelpTopicReturnValue });
+            }
 
-            // Load DLL.
-            Assembly assembly = Assembly.Load("Aquira_WinControls");
+            // If AquiraPath from Config dosent exsist, get the valid Aquira Path and replace on Config.
+            if (!Directory.Exists(config.AquiraPath))
+            {
+                // Setting the AquiraPath value on the config to the valid Aquira Path.
+                config.AquiraPath = Common.GetAquiraDirectory();
+                // Writing Data back to Config.
+                Config.Write(config);
+            }
+
+            // Load DLL. 
+            // Note: Aquira_WinControls is the only DLL that contains the wanted Interfaces.
+            Assembly assembly = Assembly.LoadFrom(Path.Combine(config.AquiraPath, "Aquira_WinControls.dll"));
 
             //Get Types from DLL.
             Type[] types = assembly.GetTypes();
@@ -30,22 +62,22 @@ namespace ListHelpTopic
                 Type Interface = type.GetInterfaces().Where(x => x.Name == "IGetHelpTopic").FirstOrDefault();
                 if (Interface != null)
                 {
-                    var check = CheckIfValid(type.Name);
+                    var check = Common.CheckIfValid(type.Name);
                     if (check != "Ok")
                     {
-                        Console.WriteLine($"{SpaceGenerator(type.Name)}{check}");
+                        Common.SpaceGenerator(type.Name, check, "Warning");
                     }
                     else
                     {
                         ConstructorInfo ci = type.GetConstructor(new Type[] { });
 
-                        Object v = ci.Invoke(null);
+                        object v = ci.Invoke(null);
 
                         MethodInfo m = type.GetProperty("HelpTopic").GetMethod;
 
                         object o = m.Invoke(v, null);
 
-                        Console.WriteLine($"{SpaceGenerator(type.Name)}'{o.ToString()}'");
+                        Common.SpaceGenerator(type.Name, o.ToString(), "Success");
                     }
                 }
             }
@@ -53,62 +85,6 @@ namespace ListHelpTopic
             // Debugging Purposes.
             Console.Write("Press any key to continue . . . ");
             Console.ReadKey();
-        }
-
-        // Item DataModel
-        public class Item
-        {
-            public string ClassName { get; set; }
-            public string HelpTopicReturnValue { get; set; }
-        }
-
-        // To check if Class is bugged and needs to get return value from 'myList'.
-        public static string CheckIfValid(string ClassName)
-        {
-            Item item = myList.FirstOrDefault(x => x.ClassName == ClassName);
-            if (item == null)
-            {
-                return "Ok";
-            }
-            else
-            {
-                return $"'{item.HelpTopicReturnValue}'  *";
-                //return item != null ? item.HelpTopicReturnValue : string.Empty;
-            }
-        }
-
-        // Generates and inserts them after string to provide a nicely formatted console display.
-        public static string SpaceGenerator(string s)
-        {
-            string str = "                                     ";
-            string newstr = str.Remove(str.Length - s.Length);
-            return $"{s}:{newstr}";
-        }
-
-        public class ConfigDataModel
-        {
-
-            public class Rootobject
-            {
-                public List<Toignore> ToIgnore { get; set; }
-            }
-
-            public class Toignore
-            {
-                public string ClassName { get; set; }
-                public string HelpTopicReturnValue { get; set; }
-            }
-
-        }
-
-        // Load config file.
-        public static void LoadConfig()
-        {
-            ConfigDataModel.Rootobject config = JsonConvert.DeserializeObject<ConfigDataModel.Rootobject>(File.ReadAllText("config.json"));
-            foreach (ConfigDataModel.Toignore x in config.ToIgnore)
-            {
-                myList.Add(new Item { ClassName = x.ClassName, HelpTopicReturnValue = x.HelpTopicReturnValue });
-            }
         }
     }
 }
