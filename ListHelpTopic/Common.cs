@@ -4,7 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -98,5 +100,25 @@ namespace ListHelpTopic
                 return key.GetValue("AquiraDirectory").ToString();
             }
         }
+        public static void DownloadLatestRelease()
+        {
+            // Gets the latest release and downloads it.
+            using (var client = new WebClient())
+            {
+                Console.WriteLine($"Downloading Release: {Program.LatestVersion}\n ");
+                client.DownloadFile("https://github.com/JeremyRuffell/ListHelpTopic/releases/latest/download/ListHelpTopic.zip", "ListHelpTopic.zip");
+            }
+        }
+
+        public static void InstallLatestRelease()
+        {
+            // Extracts the downloaded release to {path}.
+            ZipFile.ExtractToDirectory("ListHelpTopic.zip", "./");
+
+            // Deletes ListHelpTopic.zip as its just a junk file.
+            File.Delete("ListHelpTopic.zip");
+        }
+
+
     }
 }

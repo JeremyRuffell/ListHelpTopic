@@ -14,8 +14,8 @@ C:\Users\jruffell\Documents\GitHub\ListHelpTopic\ListHelpTopic\bin\Debug\ListHel
 C:\Users\jruffell\Documents\GitHub\ListHelpTopic\ListHelpTopic\bin\Debug\ListHelpTopic.pdb
 C:\Users\jruffell\Documents\GitHub\ListHelpTopic\ListHelpTopic\bin\Debug\Newtonsoft.Json.dll
 C:\Users\jruffell\Documents\GitHub\ListHelpTopic\ListHelpTopic\bin\Debug\Newtonsoft.Json.xml
-C:\Users\jruffell\Documents\GitHub\ListHelpTopic\ListHelpTopic\obj\Debug\ListHelpTopic.csprojAssemblyReference.cache
 C:\Users\jruffell\Documents\GitHub\ListHelpTopic\ListHelpTopic\obj\Debug\ListHelpTopic.csproj.CoreCompileInputs.cache
 C:\Users\jruffell\Documents\GitHub\ListHelpTopic\ListHelpTopic\obj\Debug\ListHelpTopic.csproj.CopyComplete
 C:\Users\jruffell\Documents\GitHub\ListHelpTopic\ListHelpTopic\obj\Debug\ListHelpTopic.exe
 C:\Users\jruffell\Documents\GitHub\ListHelpTopic\ListHelpTopic\obj\Debug\ListHelpTopic.pdb
+C:\Users\jruffell\Documents\GitHub\ListHelpTopic\ListHelpTopic\obj\Debug\ListHelpTopic.csprojAssemblyReference.cache
