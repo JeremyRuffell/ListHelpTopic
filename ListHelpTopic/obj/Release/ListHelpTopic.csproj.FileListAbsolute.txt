@@ -8,7 +8,6 @@ C:\Users\jruffell\Documents\GitHub\ListHelpTopic\ListHelpTopic\bin\Release\ListH
 C:\Users\jruffell\Documents\GitHub\ListHelpTopic\ListHelpTopic\bin\Release\ListHelpTopic.exe
 C:\Users\jruffell\Documents\GitHub\ListHelpTopic\ListHelpTopic\bin\Release\ListHelpTopic.pdb
 C:\Users\jruffell\Documents\GitHub\ListHelpTopic\ListHelpTopic\bin\Release\Newtonsoft.Json.dll
-C:\Users\jruffell\Documents\GitHub\ListHelpTopic\ListHelpTopic\bin\Release\Newtonsoft.Json.pdb
 C:\Users\jruffell\Documents\GitHub\ListHelpTopic\ListHelpTopic\bin\Release\Newtonsoft.Json.xml
 C:\Users\jruffell\Documents\GitHub\ListHelpTopic\ListHelpTopic\obj\Release\ListHelpTopic.csprojAssemblyReference.cache
 C:\Users\jruffell\Documents\GitHub\ListHelpTopic\ListHelpTopic\obj\Release\ListHelpTopic.csproj.CoreCompileInputs.cache
