@@ -10,14 +10,14 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ListHelpTopic
+namespace AquiraHelpTopics
 {
     public static class Common
     {
         // Generates and inserts them after string to provide a nicely formatted console display.
         public static void SpaceGenerator(string s, string s2, string type)
         {
-            string str = "                                     ";
+            string str = "                                             ";
             string newstr = str.Remove(str.Length - s.Length);
             Console.Write($"{s}:{newstr}");
 
@@ -105,18 +105,17 @@ namespace ListHelpTopic
             // Gets the latest release and downloads it.
             using (var client = new WebClient())
             {
-                Console.WriteLine($"Downloading Release: {Program.LatestVersion}\n ");
-                client.DownloadFile("https://github.com/JeremyRuffell/ListHelpTopic/releases/latest/download/ListHelpTopic.zip", "ListHelpTopic.zip");
+                client.DownloadFile("https://github.com/JeremyRuffell/AquiraHelpTopics/releases/latest/download/AquiraHelpTopics.zip", "AquiraHelpTopics.zip");
             }
         }
 
         public static void InstallLatestRelease()
         {
             // Extracts the downloaded release to {path}.
-            ZipFile.ExtractToDirectory("ListHelpTopic.zip", "./");
+            ZipFile.ExtractToDirectory("AquiraHelpTopics.zip", "./");
 
-            // Deletes ListHelpTopic.zip as its just a junk file.
-            File.Delete("ListHelpTopic.zip");
+            // Deletes AquiraHelpTopics.zip as its just a junk file.
+            File.Delete("AquiraHelpTopics.zip");
         }
 
 

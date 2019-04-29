@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28803.156
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ListHelpTopic", "ListHelpTopic\ListHelpTopic.csproj", "{56B606F8-E816-47FA-B0E3-0241C3CD7673}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AquiraHelpTopics", "ListHelpTopic\AquiraHelpTopics.csproj", "{56B606F8-E816-47FA-B0E3-0241C3CD7673}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
