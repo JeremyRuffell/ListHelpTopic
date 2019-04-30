@@ -1,6 +1,6 @@
 # Installation
 ---
-#### Download the [Install Script](https://github.com/JeremyRuffell/AquiraHelpTopics/releases/latest/download/Install_Script.ps1)
+* #### Download the [Install Script](https://github.com/JeremyRuffell/AquiraHelpTopics/releases/latest/download/Install_Script.ps1)
 *P.S.* Make Sure you click **KEEP**.
  ![github-small](https://user-images.githubusercontent.com/36174931/56937039-d2d05300-6b4e-11e9-9f1d-11dc15113cfd.png)
 
