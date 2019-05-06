@@ -22,7 +22,7 @@ namespace AquiraHelpTopics
         static void Main(string[] args)
         {
             // Finish Upadate if one was prevously started.
-            DirectoryInfo dir = new DirectoryInfo("./");
+            DirectoryInfo dir = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
             IEnumerable<FileInfo> taskFiles = dir.GetFiles().Where(p => p.Name.StartsWith("old_"));
             foreach (FileInfo item in taskFiles)
             {
@@ -60,12 +60,14 @@ namespace AquiraHelpTopics
                 Console.WriteLine();
 
                 // Rename all files.
-                DirectoryInfo directory = new DirectoryInfo("./");
-                FileInfo[] FileNames = directory.GetFiles();
+                
+                DirectoryInfo directory = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory); // (exception here)
+                Console.WriteLine("App directory is: "+ directory.FullName);
+                FileInfo[] files = directory.GetFiles();
 
-                foreach (FileInfo name in FileNames)
+                foreach (FileInfo file in files)
                 {
-                    File.Move(name.ToString(), $"old_{name.ToString()}");
+                    File.Move(file.FullName, Path.Combine(directory.FullName, $"old_{file.Name}"));
                 }
 
                 Common.DownloadLatestRelease();

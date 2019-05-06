@@ -112,7 +112,7 @@ namespace AquiraHelpTopics
         public static void InstallLatestRelease()
         {
             // Extracts the downloaded release to {path}.
-            ZipFile.ExtractToDirectory("AquiraHelpTopics.zip", "./");
+            ZipFile.ExtractToDirectory("AquiraHelpTopics.zip", AppDomain.CurrentDomain.BaseDirectory);
 
             // Deletes AquiraHelpTopics.zip as its just a junk file.
             File.Delete("AquiraHelpTopics.zip");
