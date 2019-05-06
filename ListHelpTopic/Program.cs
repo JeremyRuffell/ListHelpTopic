@@ -33,16 +33,21 @@ namespace AquiraHelpTopics
             // Get Latest Version.
             HttpClient httpClient = new HttpClient();
 
+            // GitHubs API requires a User Agent.
             httpClient.DefaultRequestHeaders.Add("User-Agent", "AquiraHelpTopics");
+            
+            // Get the Repo info from GitHubs API.
             Task<string> APIRequest = httpClient.GetStringAsync("https://api.github.com/repos/JeremyRuffell/AquiraHelpTopics/releases/latest");
             string APIResponse = APIRequest.Result;
 
+            // Deserialize the Response from the GitHub API.
             GithubAPIResponse deserializedObject = JsonConvert.DeserializeObject<GithubAPIResponse>(APIResponse);
 
+            // Try Parse the Latest Version from the Latest Release tag name given from the GitHub API.
             Version LatestVersion = null;
             Version.TryParse(deserializedObject.tag_name, out LatestVersion);
 
-            // Get Applications Version.
+            // Try Parse the Latest Version from the Latest Release tag name given from the GitHub API.
             Version ApplicationVersion = null;
             Version.TryParse(Assembly.GetExecutingAssembly().GetName().Version.ToString(), out ApplicationVersion);
 
@@ -79,6 +84,8 @@ namespace AquiraHelpTopics
             }
 
             AddExceptionClasses();
+
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
             // Load DLL. 
             // Note: Aquira_WinControls is the only DLL that contains the wanted Interfaces.
@@ -160,6 +167,19 @@ namespace AquiraHelpTopics
             myList.Add(new Item { ClassName = "Contract", HelpTopicReturnValue = "Setup_GlobalSettings_GlobalSettings_Contract" });
             myList.Add(new Item { ClassName = "ReportFilterSearchControl", HelpTopicReturnValue = "NULL" });
             myList.Add(new Item { ClassName = "RCSAdvancedSearchControl", HelpTopicReturnValue = "NULL" });
+        }
+        private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            if (e.IsTerminating)
+            {
+                // The app is closing anyway, supress the error and hard-exit now!
+                // This avoids the subsequent unhandled exception we were getting
+                Environment.Exit(1);
+            }
+            else
+            {
+                Console.WriteLine("ERROR - Unhandled App Exception! " + e.ExceptionObject);
+            }
         }
     }
 }
