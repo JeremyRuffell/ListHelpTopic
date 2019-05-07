@@ -26,8 +26,8 @@ namespace AquiraHelpTopics
             IEnumerable<FileInfo> taskFiles = dir.GetFiles().Where(p => p.Name.StartsWith("old_"));
             foreach (FileInfo item in taskFiles)
             {
-                File.SetAttributes(item.ToString(), FileAttributes.Normal);
-                File.Delete(item.ToString());
+                File.SetAttributes(Path.Combine(dir.FullName, item.Name), FileAttributes.Normal);
+                File.Delete(Path.Combine(dir.FullName, item.Name));
             }
 
             // Get Latest Version.
@@ -60,9 +60,7 @@ namespace AquiraHelpTopics
                 Console.WriteLine();
 
                 // Rename all files.
-                
                 DirectoryInfo directory = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory); // (exception here)
-                Console.WriteLine("App directory is: "+ directory.FullName);
                 FileInfo[] files = directory.GetFiles();
 
                 foreach (FileInfo file in files)
