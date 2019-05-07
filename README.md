@@ -2,10 +2,12 @@
 ---
 * ### Download the [Install Script](https://github.com/JeremyRuffell/AquiraHelpTopics/releases/latest/download/Install_Script.ps1)
 *P.S.* Make Sure you click **KEEP**.
- ![github-small](https://user-images.githubusercontent.com/36174931/56937039-d2d05300-6b4e-11e9-9f1d-11dc15113cfd.png)
+
+![github-small](https://user-images.githubusercontent.com/36174931/56937039-d2d05300-6b4e-11e9-9f1d-11dc15113cfd.png)
 
 * ### Change Your PowerShell Execution Policy
 Open PowerShell and **Run as administrator**
+
 ![image](https://user-images.githubusercontent.com/36174931/56937628-d5807780-6b51-11e9-961d-0d63da276029.png)
 
 Run this command in *PowerShell* to view your current **Execution Policy**
