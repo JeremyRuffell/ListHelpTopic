@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
+using System.Security.Principal;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -21,6 +22,14 @@ namespace AquiraHelpTopics
 
         static void Main(string[] args)
         {
+            // Checks if run as admin.
+            if (!new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator))
+            {
+                Console.Write("This applicaiton must be run as admin.\nPress any key to exit . . . ");
+                Console.ReadKey();
+                Environment.Exit(0);
+            }
+
             // Finish Upadate if one was prevously started.
             DirectoryInfo dir = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
             IEnumerable<FileInfo> taskFiles = dir.GetFiles().Where(p => p.Name.StartsWith("old_"));
