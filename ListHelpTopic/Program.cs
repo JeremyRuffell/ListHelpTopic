@@ -83,6 +83,8 @@ namespace AquiraHelpTopics
                 Console.WriteLine("]\n");
             }
 
+            StringBuilder csv = new StringBuilder();
+
             AddExceptionClasses();
 
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
@@ -103,6 +105,7 @@ namespace AquiraHelpTopics
                     if (check != "Ok")
                     {
                         Common.SpaceGenerator(type.Name, check, "Warning");
+                        csv.AppendLine($"{type.Name},{check}");
                     }
                     else
                     {
@@ -115,12 +118,26 @@ namespace AquiraHelpTopics
                         object o = m.Invoke(v, null);
 
                         Common.SpaceGenerator(type.Name, o.ToString(), "Success");
+
+                        csv.AppendLine($"{type.Name},{o.ToString()}");
                     }
                 }
             }
 
+            // Get Aquira Version from executable.
+            Version AquiraVersion;
+            Version.TryParse(Assembly.LoadFrom(Path.Combine(Common.GetAquiraDirectory(), "Aquira.exe")).GetName().Version.ToString(), out AquiraVersion);
+
+            // Write CSV to Documents > RCS > AquiraHelpTopics.
+            FileInfo AquiraHelpTopicsFile = new FileInfo(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), @"RCS\AquiraHelpTopics", $"Aquira_{AquiraVersion}.csv"));
+
+            // Create Directory if Directory isnt present.
+            AquiraHelpTopicsFile.Directory.Create();
+
+            File.WriteAllText(AquiraHelpTopicsFile.FullName, csv.ToString());
+
             // Debugging Purposes.
-            Console.Write("Press any key to continue . . . ");
+            Console.Write("\nPress any key to exit the application . . . ");
             Console.ReadKey();
         }
 
@@ -174,6 +191,9 @@ namespace AquiraHelpTopics
             {
                 // The app is closing anyway, supress the error and hard-exit now!
                 // This avoids the subsequent unhandled exception we were getting
+
+                Console.Clear();
+                Console.Write("Exiting appliation . . . ");
                 Environment.Exit(1);
             }
             else
